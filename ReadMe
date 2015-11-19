@@ -1,0 +1,14 @@
+Je sais pas encore comment on va gérer
+membre - utilisateur - admin
+
+idée: condition dans l'index.php
+    - un controller par defaut qui est visible par tout le monde (controllerVisiteur ?)
+    - si il n'y a pas  de session impossible d'acceder au controller admin et membre
+    - ça implique qu'il faut verifier qu'il y ait une session et que l'admin ou le membre existe
+    - apres on fait une view générique pour tout ou une view pour les membre,
+        une view pour admin et une view pour visiteur ?
+
+
+
+On met j'update pas le conf comme ça tu gère avec ton phpAdmin mais fait cas au nom de la database
+c'est : musee 
