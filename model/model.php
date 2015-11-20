@@ -86,8 +86,29 @@ class Model{
         return $req_prep->fetch();
     }
 
+    // verifie si un element existe dans une table
+    public static function exist ($key){
+        $sql = 'SELECT *
+                FROM '.static::$table.'
+                WHERE '.static::$primary.'=:key';
+        try{
+            $req_prep =  Model::$pdo->prepare($sql);
+            $req_prep->bindParam(':key', $key);
+        }catch (PDOException $e){
+            if(Conf::getDebug())
+                echo $e->getMessage(); // affiche un message d'erreur
+            else
+                echo "une erreur est survenue <a href='index.php> retour à la page d\'accueil</a>";
+            die();
+        }
+        $res = true;
+        if($req_prep == null){
+            // si le resultat de la requete est vide
+            $res = false;
+        }
+        return $res;
 
-
+    }
 
 
 }
