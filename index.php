@@ -13,8 +13,10 @@ $ROOT = __DIR__;  /*  Correspond à /var/www/html/private/TD4
 // DS contient le slash des chemins de fichiers, c'est-à-dire '/' sur Linux et '\' sur Windows
 $DS = DIRECTORY_SEPARATOR;
 
-switch($contoller){
+$controller = $_GET['controller'];
+switch($controller){
     case 'membre':
+        require("{$ROOT}{$DS}controller{$DS}controllerMembre.php");
         break;
     case 'document':
         break;
