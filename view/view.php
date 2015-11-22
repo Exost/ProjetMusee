@@ -15,8 +15,9 @@
 // alors $filepath=".../view/voiture/"
 //       $filename="viewAllVoiture.php";
 // et on charge '.../view/voiture/viewAllVoiture.php'
+echo $erreur;
 $filepath = "{$ROOT}{$DS}view{$DS}{$controller}{$DS}";
-$filename = "view".ucfirst($view) . ucfirst($controller) . '.php';
+$filename = "view".ucfirst($view) . ucfirst($control) . '.php';
 require "{$filepath}{$filename}";
 ?>
 

@@ -7,7 +7,7 @@
  */
 ?>
 
-<form method="post" action="index.php?controller=membre&action=created">
+<form method="post" action="index.php?controller=visiteur&action=created">
     <legend>Inscription</legend>
     <fieldset>
         <label for="login" class="label"  >login</label>
