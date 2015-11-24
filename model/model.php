@@ -19,33 +19,6 @@ class Model{
 
     }
 
-
-
-    static function select($para) {
-        $sql = "SELECT * from ".static::$table." WHERE ".static::$primary."=:nom_var";
-        try{
-            $req_prep = Model::$pdo->prepare($sql);
-            $req_prep->bindParam(":nom_var", $para);
-            $req_prep->execute();
-            $nomModel =  'model'.substr(static::$table , 3) ;
-            $req_prep->setFetchMode(PDO::FETCH_CLASS, $nomModel );
-            if ($req_prep->rowCount()==0){
-                return null;
-                die();// Vérifier si $req_prep->rowCount() != 0
-            }else{
-                $rslt = $req_prep->fetch();
-                return $rslt;}
-        } catch(PDOException $e) {
-            if (Conf::getDebug()) {
-                echo $e->getMessage(); // affiche un message d'erreur
-            } else {
-                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
-            }
-            die();
-        }
-    }
-
-
     public static function getAll(){
         $SQL="SELECT * FROM ".static::$table." ";
         //echo $SQL ;
@@ -66,7 +39,6 @@ class Model{
         }
     }
 
-
     public static function countElem (){
         $sql = 'SELECT count(:elem) AS ResCount
                 FROM '.static::$table.'';
@@ -86,7 +58,6 @@ class Model{
         return $req_prep->fetch();
     }
 
-    // verifie si un element existe dans une table
     public static function exist ($key){
         $sql = 'SELECT *
                 FROM '.static::$table.'
@@ -108,6 +79,32 @@ class Model{
         }
         return $res;
 
+    }
+
+    // verifie si un element existe dans une table
+
+    static function insert($tab){
+        $sql = "INSERT INTO ".static::$table." VALUES(";
+        foreach ($tab as $cle => $valeur){
+            $sql .=" :".$cle.",";
+        }
+        $sql=rtrim($sql,",");
+        $sql.=");";
+        try{
+            $req_prep = Model::$pdo->prepare($sql);
+            $values = array();
+            foreach ($tab as $cle => $valeur){
+                $values[":".$cle] = $valeur;
+            }
+            $req_prep->execute($values);
+        }catch(PDOException $e) {
+            if (Conf::getDebug()) {
+                echo $e->getMessage(); // affiche un message d'erreur
+            } else {
+                echo 'Une erreur est survenue <a href="https://infolimon.iutmontp.univ-montp2.fr/~contremoulinp/TD6/index.php"> retour a la page d\'accueil </a>';
+            }
+            die();
+        }
     }
 
     function delete($para) {
@@ -152,25 +149,25 @@ class Model{
         }
     }
 
-    function insert($tab){
-        $sql = "INSERT INTO ".static::$table." VALUES(";
-        foreach ($tab as $cle => $valeur){
-            $sql .=" :".$cle.",";
-        }
-        $sql=rtrim($sql,",");
-        $sql.=");";
+    static function select($para) {
+        $sql = "SELECT * from ".static::$table." WHERE ".static::$primary."=:nom_var";
         try{
             $req_prep = Model::$pdo->prepare($sql);
-            $values = array();
-            foreach ($tab as $cle => $valeur){
-                $values[":".$cle] = $valeur;
-            }
-            $req_prep->execute($values);
-        }catch(PDOException $e) {
+            $req_prep->bindParam(":nom_var", $para);
+            $req_prep->execute();
+            $nomModel =  'model'.substr(static::$table , 3) ;
+            $req_prep->setFetchMode(PDO::FETCH_CLASS, $nomModel );
+            if ($req_prep->rowCount()==0){
+                return null;
+                die();// Vérifier si $req_prep->rowCount() != 0
+            }else{
+                $rslt = $req_prep->fetch();
+                return $rslt;}
+        } catch(PDOException $e) {
             if (Conf::getDebug()) {
                 echo $e->getMessage(); // affiche un message d'erreur
             } else {
-                echo 'Une erreur est survenue <a href="https://infolimon.iutmontp.univ-montp2.fr/~contremoulinp/TD6/index.php"> retour a la page d\'accueil </a>';
+                echo 'Une erreur est survenue <a href=""> retour a la page d\'accueil </a>';
             }
             die();
         }

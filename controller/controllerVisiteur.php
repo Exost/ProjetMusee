@@ -15,14 +15,7 @@ switch($action){
         $control='Membre';
         break;
     case 'created':
-        $log = $_POST['login'];
-        if(modelMembre::exist($log)){
-            // si l'element existe deja
-            $view = "Create";
-            $control='Membre';
-            $erreur="ce login existe déja veuillez en choisir un autre";
-        }
-        else{
+
             if($_POST['mdp'] != $_POST['mdp2']){
                 $view = "Create";
                 $control='Membre';
@@ -34,10 +27,12 @@ switch($action){
                 $mail = $_POST['email'];
                 $sexe = $_POST['sexe'];
                 $passwd= sha1($_POST['mdp']); // mot de passe codé --> sécurite
-                // $membre = new modelMembre();
+                $tab = array($log,$nom,$prenom,$mail,$sexe,$passwd);
+                modelMembre::insert($tab);
+
                 //insertion dans la base de donne
             }
-        }
+
         break;
     case 'login':
         $view= 'LogIn'; //connexion
