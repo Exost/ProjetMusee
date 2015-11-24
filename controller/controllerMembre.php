@@ -8,6 +8,9 @@
 $action = $_GET['action'];
 if(isset($_SESSION['login'])){ // s'il existe une session alors
     switch($action){
+        case 'post':
+            //poster un document
+            break;
 
     }
 }else{

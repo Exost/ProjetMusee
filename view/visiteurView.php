@@ -4,7 +4,11 @@
 <html>
 
 <body>
+
+
+
 <?php
+require('visteurHeader.php');
 /**
  * Created by PhpStorm.
  * User: enzo
@@ -23,4 +27,7 @@ require "{$filepath}{$filename}";
 
 </body>
 
+<?php
+    require('visiteurFooter.php');
+?>
 </html>
