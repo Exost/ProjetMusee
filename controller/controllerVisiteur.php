@@ -1,5 +1,5 @@
 <?php
-
+session_start();// on démarre toujours les session sur les page
 require_once("{$ROOT}{$DS}model{$DS}modelMembre.php");
 /**
  * Created by PhpStorm.
@@ -9,6 +9,7 @@ require_once("{$ROOT}{$DS}model{$DS}modelMembre.php");
  */
 $action = $_GET['action'];
 $erreur =''; // une idée pour afficher l'erreur sur la page
+$layout = 'visiteurView';
 switch($action){
     case 'create':
         $view="Create";
@@ -42,14 +43,19 @@ switch($action){
         $key = $_POST['login'];
         if(modelMembre::exist($key)){
             $membre = modelMembre::select($key);
-            $mdp =shal($_POST['mdp']);
+            $mdp = sha1($_POST['mdp']);
 
-            if($membre['mot_de_passe'] =$mdp ){ // verification de la concordance des mot de passe
+            if($membre['mot_de_passe'] ==$mdp ){ // verification de la concordance des mot de passe
                 // alors l'utilisateur est connecté
-                session_start();
-                $_SESSION['login'] = $membre['login'];
-                //ouverture de la partie membre 'a voir comment faire'
 
+                $_SESSION['login'] = $membre['login'];
+                $layout='membreView';
+                echo "{$_SESSION['login']}";
+                //ouverture de la partie membre 'a voir comment faire'
+            }else{
+                $control='Membre';
+                $view = 'LogIn';
+                $erreur='Mot de passe incorrect';
             }
         }else{
             $control='Membre';
@@ -60,4 +66,4 @@ switch($action){
         break;
 
 }
-require("{$ROOT}{$DS}view{$DS}visiteurView.php");
+require("{$ROOT}{$DS}view{$DS}{$layout}.php");
