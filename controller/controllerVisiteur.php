@@ -65,4 +65,4 @@ switch($action){
         break;
 
 }
-require("{$ROOT}{$DS}view{$DS}view.php");
+require("{$ROOT}{$DS}view{$DS}visiteurView.php");
