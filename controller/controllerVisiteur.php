@@ -1,6 +1,8 @@
 <?php
-session_start();// on démarre toujours les session sur les page
+session_start();// on démarre toujours les session sur les pages
+
 require_once("{$ROOT}{$DS}model{$DS}modelMembre.php");
+
 /**
  * Created by PhpStorm.
  * User: enzo
@@ -10,6 +12,7 @@ require_once("{$ROOT}{$DS}model{$DS}modelMembre.php");
 
 $erreur =''; // une idée pour afficher l'erreur sur la page
 $layout = 'visiteurView';
+
 switch($action){
     case 'create':
         $view="Create";
@@ -21,7 +24,9 @@ switch($action){
                 $view = "Create";
                 $control='Membre';
                 $erreur='mot de passe different';
-            }else{
+            }
+            else
+            {
                 $log =$_POST['login'];
                 $nom =$_POST['nom'];
                 $prenom =$_POST['prenom'];

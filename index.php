@@ -24,7 +24,7 @@ else{
 }
 
 
-if (isset($_GET['action'] ))
+if ( !isset($_GET['action'] ))
 {
     $action="LogIn";
 }
@@ -32,6 +32,8 @@ else
 {
     $action =$_GET['action'];
 }
+
+$view = '';
 
 
 

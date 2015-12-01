@@ -21,7 +21,7 @@ require('visteurHeader.php');
 // et on charge '.../view/voiture/viewAllVoiture.php'
 echo $erreur;
 $filepath = "{$ROOT}{$DS}view{$DS}{$controller}{$DS}";
-$filename = "view".ucfirst($view) . ucfirst($control) . '.php';
+$filename = "view".ucfirst($view) . ucfirst($controller) . '.php';
 require "{$filepath}{$filename}";
 ?>
 
