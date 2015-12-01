@@ -7,7 +7,7 @@ require_once("{$ROOT}{$DS}model{$DS}modelMembre.php");
  * Date: 19/11/15
  * Time: 16:46
  */
-$action = $_GET['action'];
+
 $erreur =''; // une idée pour afficher l'erreur sur la page
 $layout = 'visiteurView';
 switch($action){

@@ -24,6 +24,17 @@ else{
 }
 
 
+if (isset($_GET['action'] ))
+{
+    $action="LogIn";
+}
+else
+{
+    $action =$_GET['action'];
+}
+
+
+
 switch($controller){
     case 'visiteur':
         require("{$ROOT}{$DS}controller{$DS}controllerVisiteur.php");
@@ -32,5 +43,9 @@ switch($controller){
         break;
     case 'membre':
         break;
+
+
+
+
 }
 ?>
