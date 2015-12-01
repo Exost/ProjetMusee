@@ -6,14 +6,24 @@
  * Time: 13:58
  */
 
-$ROOT = __DIR__;  /*  Correspond à /var/www/html/private/TD4
+$ROOT = __DIR__;  /*  Correspond à /var/www/html/....
                                permet de le rendre portable
                       */
 
 // DS contient le slash des chemins de fichiers, c'est-à-dire '/' sur Linux et '\' sur Windows
 $DS = DIRECTORY_SEPARATOR;
 
-$controller = $_GET['controller'];
+
+
+if ( !isset($_GET['controller']) )
+{
+    $controller = 'visiteur';
+}
+else{
+    $controller = $_GET['controller'];
+}
+
+
 switch($controller){
     case 'visiteur':
         require("{$ROOT}{$DS}controller{$DS}controllerVisiteur.php");
@@ -23,3 +33,4 @@ switch($controller){
     case 'membre':
         break;
 }
+?>
